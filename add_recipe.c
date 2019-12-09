@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 void add_recipe(){
     int choice = 0;
@@ -25,6 +26,11 @@ void add_recipe(){
 }
 
 void add_manually(){
+    printf("Enter recipe name\n");
+
+    scanf("%s",);
+
+    printf("\nEnter ingredients\n");
 
 }
 
