@@ -1,0 +1,80 @@
+@0 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs 
+@1 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs 
+@2 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs
+@3 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs  
+@4 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs 
+@5 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs 
+@6 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs 
+@7 /* New recipe symbol */ 
+Dish name1 /*Difficulty*/ 
+15 /* Time */ 
+Wholegrain_pasta,wholegrain,300 
+Water,other,200 
+Meatballs,meat,200 
+# /* Ingredients done symbol */ 
+1. Boil the water 
+2. Cook the pasta 
+3. Add the meatballs 
