@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-struct recipy 
+struct recipe 
 { 
     char name[] 
     int time 
@@ -18,7 +18,7 @@ struct ingredient
     int amount 
 }; 
 
-void add_recipe(struct ingredient ingrediens[], struct recipy recipe_list[]){
+void add_recipe(struct ingredient ingrediens[], struct recipe recipe_list[]){
     int choice = 0;
 
     printf("To add from txt file enter 1\nTo add manually enter 2\n");
@@ -42,7 +42,7 @@ void add_recipe(struct ingredient ingrediens[], struct recipy recipe_list[]){
     return;
 }
 
-void add_manually(struct ingredient ingrediens[], struct recipy recipe_list[])
+void add_manually(struct ingredient ingrediens[], struct recipe recipe_list[])
 {
     int choice;
     
@@ -77,8 +77,15 @@ void add_manually(struct ingredient ingrediens[], struct recipy recipe_list[])
     return;
 }
 
-void add_from_txt(struct ingredient ingrediens[], struct recipy recipe_list[])
+void add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
 {
+    FILE *recipetxt;
+    printf("Enter name of recipe file, with file extension");
+    recipetxt = fopen(scanf("%s"),"r");
+
+    fgets(recipe_list[].name, 256, recipetxt);
+
+    fclose(recipetxt);
 
     return;
 }
