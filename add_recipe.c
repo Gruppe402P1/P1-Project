@@ -80,11 +80,29 @@ void add_manually(struct ingredient ingrediens[], struct recipe recipe_list[])
 void add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
 {
     FILE *recipetxt;
+    char temp[100]
     printf("Enter name of recipe file, with file extension");
     recipetxt = fopen(scanf("%s"),"r");
 
     fgets(recipe_list[].name, 256, recipetxt);
+    
+    while (fgets(temp[], 100, recipetxt) != NULL)
+    {
+        if()
+        {
+            if (/* condition */)
+            {
+                
+            }
+        }
+        else
+        {
+            /* code */
+        }
+        
 
+    }
+    
     fclose(recipetxt);
 
     return;
