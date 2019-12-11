@@ -35,8 +35,8 @@ int read_for_ingrediens(char* filename_str, item * list_arr)
 	char* line_str = malloc(sizeof(char)*MAX_LINE_LENGTH);
 	if(
 		file_pointer == NULL||line_str == NULL
-	    ||fgets(line_str,MAX_LINE_LENGTH,file_pointer) == NULL
-	    ||read_day_for_ingrediens(file_pointer,list_arr,0)/*getting rid of the first line*/
+	    ||fgets(line_str,MAX_LINE_LENGTH,file_pointer) == NULL /*getting rid of the first line*/
+	    ||read_day_for_ingrediens(file_pointer,list_arr,0)
 	) 
 	{
 		return 1; /*Error*/
