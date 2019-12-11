@@ -23,7 +23,7 @@ int main() {
 	if(read_for_ingrediens(FILENAME, shopping_list_arr)||shopping_list_arr == NULL)
 	{
 		printf("fejl");
-		return 1;
+		return 1; /*Error*/
 	}
 	for(i = 0; i <= MAX_LIST_LENGTH; i++)
 	{
@@ -40,21 +40,16 @@ int main() {
 int read_for_ingrediens(char* filename_str, item * list_arr)
 {
 	FILE *file_pointer = fopen(filename_str,"r");
-	if(file_pointer == NULL)
-	{
-		return 1; /*Error*/
-	}
 	char* line_str = malloc(sizeof(char)*MAX_LINE_LENGTH);
-	if(line_str == NULL)
+	if(
+		file_pointer == NULL||line_str == NULL
+	    ||fgets(line_str,MAX_LINE_LENGTH,file_pointer) == NULL
+	    ||read_day_for_ingrediens(file_pointer,list_arr,0)/*getting rid of the first line*/
+	) 
 	{
 		return 1; /*Error*/
 	}
-	fgets(line_str,MAX_LINE_LENGTH,file_pointer); /*getting rid of the first line*/
 	free(line_str);
-	if((read_day_for_ingrediens(file_pointer,list_arr,0)))
-	{
-		return 1; /*Error*/
-	}
 	fclose(file_pointer);
 	return 0;
 }
