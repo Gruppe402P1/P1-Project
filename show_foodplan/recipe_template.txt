@@ -1,0 +1,11 @@
+@
+Dish name
+1
+15
+Wholegrain_pasta wholegrain 300
+Water other 200
+Meatballs meat 300
+#
+1. Boil the water
+2. Cook the pasta
+3. Add the meatballs
