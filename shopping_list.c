@@ -15,25 +15,17 @@ typedef struct item item;
 
 int read_for_ingrediens(char* filename_str, item * list_arr);
 int read_day_for_ingrediens(FILE * file_pointer,item * list_arr,int index);
+void print_shopping_list(item* shopping_list_arr);
 void remove_underscore(char* str);
 
 int main() {
-	item* shopping_list_arr = calloc(sizeof(item),sizeof(item));
-	int i;
+	item* shopping_list_arr = calloc(MAX_LIST_LENGTH,sizeof(item));
 	if(read_for_ingrediens(FILENAME, shopping_list_arr)||shopping_list_arr == NULL)
 	{
 		printf("fejl");
 		return 1; /*Error*/
 	}
-	for(i = 0; i <= MAX_LIST_LENGTH; i++)
-	{
-		if(shopping_list_arr[i].name_str[0] != 0)
-		{
-			remove_underscore(shopping_list_arr[i].name_str);
-			remove_underscore(shopping_list_arr[i].type_str);
-			printf("%s %d g\n",shopping_list_arr[i].name_str,shopping_list_arr[i].amount_int);
-		}
-	}
+	print_shopping_list(shopping_list_arr);
 	return 0;
 }
 /*Reads for ingrediens by reading it day for day*/
@@ -53,7 +45,7 @@ int read_for_ingrediens(char* filename_str, item * list_arr)
 	fclose(file_pointer);
 	return 0;
 }
-/*reads a day for ingredienses*/
+/*Reads a day for ingredienses*/
 int read_day_for_ingrediens(FILE * file_pointer,item * list_arr,int index)
 {
 	char* line_str = malloc(sizeof(char)*MAX_LINE_LENGTH);
@@ -96,6 +88,7 @@ int read_day_for_ingrediens(FILE * file_pointer,item * list_arr,int index)
 	}
 	free(line_str);
 	read_day_for_ingrediens(file_pointer,list_arr,index);
+	return 0;
 }
 /*Changes underscore to space*/
 void remove_underscore(char* str)
@@ -106,6 +99,19 @@ void remove_underscore(char* str)
 		if(str[i] =='_')
 		{
 			str[i] = ' ';
+		}
+	}
+}
+/*Prints all items that are not zero in shopping_list_arr*/
+void print_shopping_list(item* shopping_list_arr){
+	int i;
+	for(i = 0; i < MAX_LIST_LENGTH; i++)
+	{
+		if(shopping_list_arr[i].name_str[0] != 0)
+		{
+			remove_underscore(shopping_list_arr[i].name_str);
+			remove_underscore(shopping_list_arr[i].type_str);
+			printf("%s %d g\n",shopping_list_arr[i].name_str,shopping_list_arr[i].amount_int);
 		}
 	}
 }
