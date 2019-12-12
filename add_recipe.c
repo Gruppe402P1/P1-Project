@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 struct recipe 
@@ -16,7 +17,13 @@ struct ingredient
     char name[] /* fx. røget laks */ 
     char food_type[] /* fx fisk */ 
     int amount 
-}; 
+};
+
+/*Får programmet til at indlæse opskriften fra en valgt txt fil*/
+void add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[]);
+
+/*Tillader brugeren at indlæse deres opskrift manuelt*/
+void add_manually(struct ingredient ingrediens[], struct recipe recipe_list[]);
 
 void add_recipe(struct ingredient ingrediens[], struct recipe recipe_list[]){
     int choice = 0;
@@ -80,7 +87,15 @@ void add_manually(struct ingredient ingrediens[], struct recipe recipe_list[])
 void add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
 {
     FILE *recipetxt;
-    char temp[100]
+    char temp[100];
+    char* instruc_temp = (char*)calloc(2000, sizeof(char));
+
+    if(instruc_temp == NULL){
+        printf("Failed to allocate memory");
+        exit(0);
+    }
+
+    int first = 0, second = 0, third = 0;
     printf("Enter name of recipe file, with file extension");
     recipetxt = fopen(scanf("%s"),"r");
 
@@ -88,21 +103,35 @@ void add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
     
     while (fgets(temp[], 100, recipetxt) != NULL)
     {
-        if()
+        if(temp[0] >= 0 && temp[0] < 10)
         {
-            if (/* condition */)
+            first = temp[0];
+
+            if(temp[1] >= 0 && temp[1] < 10)
             {
-                
+                first *= 10;
+                second = temp[1];
+
+                if(temp[2] >= 0 && temp[2] < 10)
+                {
+                    first *= 10;
+                    second *= 10;
+                    third = temp[2];
+                } 
             }
+
+            ingrediens[].amount = first + second + third;
         }
         else
         {
-            /* code */
+            strcat(instruc_temp, temp);
         }
         
-
     }
+
+    strcpy(recipe_list[].instructions, instruc_temp);
     
+    free(instruc_temp);
     fclose(recipetxt);
 
     return;
