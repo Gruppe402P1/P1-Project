@@ -214,6 +214,7 @@ int read_day_for_ingrediens(FILE * file_pointer,item * list_arr, int day_int)
 			}
 		}
 	}
+	free(line_str);
 	return 0;
 }
 /*Changes underscore to space*/
