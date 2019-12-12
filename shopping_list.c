@@ -173,8 +173,7 @@ int read_days_for_ingrediens(FILE * file_pointer,item * list_arr)
 		}
 	}
 	free(line_str);
-	read_days_for_ingrediens(file_pointer,list_arr);
-	return 0;
+	return read_days_for_ingrediens(file_pointer,list_arr);
 }
 
 int read_day_for_ingrediens(FILE * file_pointer,item * list_arr, int day_int)
