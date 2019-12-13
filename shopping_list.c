@@ -33,13 +33,14 @@ int main() {
 		return 1; /*Error*/
 	}
 	print_shopping_list(shopping_list_arr);
+	free(shopping_list_arr);
 	return 0;
 }
 
 int prompt_for_day_or_week()
 {
 	char* day_str = malloc(sizeof(char)*MAX_LINE_LENGTH);
-    int day_int = 0,scanres = 0;
+    int scanres = 0;
     printf("Write a day or \"all\" for the week: ");
     do{
         scanres = scanf("%s",day_str);
@@ -102,7 +103,7 @@ void make_lowercase(char* day_str)
     {
         if(day_str[i] > 'A' && day_str[i] < 'Z')
         {
-            tolower(day_str[i]);
+            day_str[i] = tolower(day_str[i]);
         }
     }
 }
@@ -147,21 +148,18 @@ int read_days_for_ingrediens(FILE * file_pointer,item * list_arr)
 	}
 	while(line_str[0] != '#')
 	{
-		if(fgets(line_str,MAX_LINE_LENGTH,file_pointer)!=NULL)
+		if(fgets(line_str,MAX_LINE_LENGTH,file_pointer)!=NULL && line_str[0] != '#')
 		{
-			if(line_str[0] != '#')
+			sscanf(line_str,"%[^,]" "%*c" "%[^,]" "%*c" "%d",temp_item.name_str,temp_item.type_str,&temp_item.amount_int);
+			for(i = 0;strcmp(temp_item.name_str,list_arr[i].name_str) != 0 && list_arr[i].name_str[0] != '\0';i++);
+			if(strcmp(temp_item.name_str,list_arr[i].name_str) == 0 || list_arr[i].name_str[0] == '\0')
 			{
-				sscanf(line_str,"%[^,]" "%*c" "%[^,]" "%*c" "%d",temp_item.name_str,temp_item.type_str,&temp_item.amount_int);
-				for(i = 0;strcmp(temp_item.name_str,list_arr[i].name_str) != 0 && list_arr[i].name_str[0] != '\0';i++);
-				if(strcmp(temp_item.name_str,list_arr[i].name_str) == 0 || list_arr[i].name_str[0] == '\0')
-				{
-					list_arr[i].amount_int += temp_item.amount_int;
-				}
-				if(list_arr[i].name_str[0] == '\0')
-				{
-					strcpy(list_arr[i].name_str,temp_item.name_str);
-					strcpy(list_arr[i].type_str,temp_item.type_str);
-				}
+				list_arr[i].amount_int += temp_item.amount_int;
+			}
+			if(list_arr[i].name_str[0] == '\0')
+			{
+				strcpy(list_arr[i].name_str,temp_item.name_str);
+				strcpy(list_arr[i].type_str,temp_item.type_str);
 			}
 		}
 	}
