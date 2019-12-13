@@ -4,19 +4,18 @@
 
 struct ingredient 
 { 
-    char name[256]; /* fx. røget laks */ 
-    char food_type[256]; /* fx fisk */ 
+    char name[20]; /* fx. røget laks */ 
+    char food_type[10]; /* fx fisk */ 
     int amount; 
 };
 
 struct recipe 
 { 
-    char name[256];
+    char name[20];
     int time; 
     int difficulty; 
-    struct ingredient ingrediens[256];
-    char instructions[256];
-    char source[256];
+    struct ingredient ingrediens[20];
+    char instructions[200];
 };
 
 /*Får programmet til at indlæse opskriften fra en valgt txt fil*/
@@ -31,8 +30,8 @@ void write_to_txt(struct ingredient ingrediens[], struct recipe recipe_list[], i
 int main(){
     int choice = 0, ingredient_count;
 
-    struct ingredient ingrediens[256] = {0};
-    struct recipe recipe_list[256] = {0};
+    struct ingredient ingrediens[20] = {0};
+    struct recipe recipe_list = {0};
 
     printf("To add from txt file enter 1\nTo add manually enter 2\n");
 
@@ -57,15 +56,15 @@ int main(){
     return 0;
 }
 
-int add_manually(struct ingredient ingrediens[], struct recipe recipe_list[])
+int add_manually(struct ingredient ingrediens[], struct recipe recipe_list)
 {
     int choice, ingredient_count = 0;
 
     printf("Enter recipe name\n");
-    scanf("%s", recipe_list[0].name);
+    scanf("%s", recipe_list.name);
 
     printf("\nEnter instructions\n");
-    scanf("%s", recipe_list[0].instructions);
+    scanf("%s", recipe_list.instructions);
 
     do
     {   
@@ -87,15 +86,15 @@ int add_manually(struct ingredient ingrediens[], struct recipe recipe_list[])
     while (choice != 0);
     
     printf("\nEnter amount of time\n");
-    scanf("%d", &recipe_list[0].time);
+    scanf("%d", &recipe_list.time);
 
     printf("\nEnter difficulty from 1 = Easy to 10 = Hard\n");
-    scanf("%d", &recipe_list[0].difficulty);
+    scanf("%d", &recipe_list.difficulty);
 
     return ingredient_count;
 }
 
-int add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
+int add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list)
 {
     FILE *recipetxt;
     char temp[100];
@@ -112,7 +111,7 @@ int add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
 
     recipetxt = fopen(temp,"r");
 
-    fgets(recipe_list[0].name, 256, recipetxt);
+    fgets(recipe_list.name, 200, recipetxt);
     
     while (fgets(temp, 100, recipetxt) != NULL)
     {
@@ -148,7 +147,7 @@ int add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
         
     }
 
-    strcpy(recipe_list[0].instructions, instruc_temp);
+    strcpy(recipe_list.instructions, instruc_temp);
     
     free(instruc_temp);
     fclose(recipetxt);
@@ -156,13 +155,13 @@ int add_from_txt(struct ingredient ingrediens[], struct recipe recipe_list[])
     return ingredient_count;
 }
 
-void write_to_txt(struct ingredient ingrediens[], struct recipe recipe_list[], int ingredient_count)
+void write_to_txt(struct ingredient ingrediens[], struct recipe recipe_list, int ingredient_count)
 {
     FILE *database;
     int count;
     database = fopen("recipes.txt","a");
 
-    fprintf(database, "%s\n\n%s\n\n", recipe_list[0].name, recipe_list[0].instructions);
+    fprintf(database, "%s\n\n%s\n\n", recipe_list.name, recipe_list.instructions);
 
     for (count = 0; count < ingredient_count; count++)
     {
