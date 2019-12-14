@@ -101,7 +101,7 @@ void make_lowercase(char* day_str)
     int i;
     for(i = 0; day_str[i] != '\0'; i++)
     {
-        if(day_str[i] > 'A' && day_str[i] < 'Z')
+        if(day_str[i] >= 'A' && day_str[i] <= 'Z')
         {
             day_str[i] = tolower(day_str[i]);
         }
@@ -146,10 +146,8 @@ int read_days_for_ingrediens(FILE * file_pointer,item * list_arr)
 	{
 		fgets(line_str,MAX_LINE_LENGTH,file_pointer);
 	}
-	while(line_str[0] != '#')
+	while(fgets(line_str,MAX_LINE_LENGTH,file_pointer)!=NULL && line_str[0] != '#')
 	{
-		if(fgets(line_str,MAX_LINE_LENGTH,file_pointer)!=NULL && line_str[0] != '#')
-		{
 			sscanf(line_str,"%[^,]" "%*c" "%[^,]" "%*c" "%d",temp_item.name_str,temp_item.type_str,&temp_item.amount_int);
 			for(i = 0;strcmp(temp_item.name_str,list_arr[i].name_str) != 0 && list_arr[i].name_str[0] != '\0';i++);
 			if(strcmp(temp_item.name_str,list_arr[i].name_str) == 0 || list_arr[i].name_str[0] == '\0')
@@ -161,13 +159,12 @@ int read_days_for_ingrediens(FILE * file_pointer,item * list_arr)
 				strcpy(list_arr[i].name_str,temp_item.name_str);
 				strcpy(list_arr[i].type_str,temp_item.type_str);
 			}
-		}
 	}
 	while(line_str[0] != '@')
 	{
 		if(fgets(line_str,MAX_LINE_LENGTH,file_pointer)== NULL)
 		{
-			return 0;
+			return 0; /*Reached the end of the file*/
 		}
 	}
 	free(line_str);
@@ -178,7 +175,6 @@ int read_day_for_ingrediens(FILE * file_pointer,item * list_arr, int day_int)
 {
 	char* line_str = malloc(sizeof(char)*MAX_LINE_LENGTH);
 	int i;
-	item temp_item;
 	for(i = 0; i != day_int;)
 	{
 		if(fgets(line_str,MAX_LINE_LENGTH,file_pointer) ==NULL)
@@ -194,22 +190,9 @@ int read_day_for_ingrediens(FILE * file_pointer,item * list_arr, int day_int)
 	{
 		fgets(line_str,MAX_LINE_LENGTH,file_pointer);
 	}
-	while(line_str[0] != '#')
+	for(i = 0; fgets(line_str,MAX_LINE_LENGTH,file_pointer)!=NULL && line_str[0] != '#';i++)
 	{
-		if(fgets(line_str,MAX_LINE_LENGTH,file_pointer)!=NULL)
-		{
-			if(line_str[0] != '#')
-			{
-				sscanf(line_str,"%[^,]" "%*c" "%[^,]" "%*c" "%d",temp_item.name_str,temp_item.type_str,&temp_item.amount_int);
-				for(i = 0;list_arr[i].name_str[0] != '\0';i++);
-				if(list_arr[i].name_str[0] == '\0')
-				{
-					list_arr[i].amount_int += temp_item.amount_int;
-					strcpy(list_arr[i].name_str,temp_item.name_str);
-					strcpy(list_arr[i].type_str,temp_item.type_str);
-				}
-			}
-		}
+		sscanf(line_str,"%[^,]" "%*c" "%[^,]" "%*c" "%d",list_arr[i].name_str,list_arr[i].type_str,&list_arr[i].amount_int);
 	}
 	free(line_str);
 	return 0;
