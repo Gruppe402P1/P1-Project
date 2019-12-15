@@ -28,7 +28,7 @@ int main()
         case 2: 
           generate_foodplan(); break; 
         case 3: 
-          print_shoppinglist(); break; 
+          print_shopping_list(); break; 
         case 4: 
           show_foodplan(); break; 
         case 5: 
