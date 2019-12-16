@@ -18,6 +18,17 @@ struct recipe
     char instructions[200];
 };
 
+void flush(void){
+  char trash;
+  
+  do{
+    scanf("%c", &trash);
+  }
+  while(trash != '\n');
+
+  return;
+}
+
 /*Får programmet til at indlæse opskriften fra en valgt txt fil*/
 int add_from_txt(struct ingredient ingrediens[], struct recipe *recipe_list);
 
@@ -59,40 +70,48 @@ int main(){
 int add_manually(struct ingredient ingrediens[], struct recipe *recipe_list)
 {
     int choice, ingredient_count = 0;
-
-    printf("Enter recipe name\n");
-    scanf("%s", recipe_list->name);
+    flush();
+    printf("Enter recipe name: ");
+    scanf("%[^\n]", recipe_list->name);
     printf("%s", recipe_list->name);
-
+    
+    flush();
     printf("\nEnter instructions\n");
-    scanf("%s", recipe_list->instructions);
+    scanf("%[^\n]", recipe_list->instructions);
     printf("%s", recipe_list->instructions);
 
     do
     {   
 
+        flush();
         printf("\nEnter ingredient\n");
-        scanf("%s", ingrediens[ingredient_count].name);
+        scanf("%[^\n]", ingrediens[ingredient_count].name);
 
+        flush();
         printf("\nEnter amount in g\n");
         scanf("%d", &ingrediens[ingredient_count].amount);
 
+        flush();
         printf("\nEnter foodtype\n");
         scanf("%s", ingrediens[ingredient_count].food_type);
 
         ingredient_count++;
 
+        flush();
         printf("\nEnter another ingredient, 0 = no,?\n");
         scanf("%d", &choice);
     }
     while (choice != 0);
     
+    flush();
     printf("\nEnter amount of time\n");
     scanf("%d", &recipe_list->time);
 
+    flush();
     printf("\nEnter difficulty from 1 = Easy to 10 = Hard\n");
     scanf("%d", &recipe_list->difficulty);
 
+    flush();
     return ingredient_count;
 }
 
@@ -108,8 +127,10 @@ int add_from_txt(struct ingredient ingrediens[], struct recipe *recipe_list)
         return 1;
     }
 
+    flush();
     printf("Enter name of recipe file, with file extension");
-    scanf("%s", temp);
+    scanf("%[^\n]", temp);
+    flush();
 
     recipetxt = fopen(temp,"r");
 
@@ -161,7 +182,7 @@ void write_to_txt(struct ingredient ingrediens[], struct recipe *recipe_list, in
 {
     FILE *database;
     int count;
-    database = fopen("recipes.txt","w");
+    database = fopen("recipes.txt","a");
 
     printf("%s", recipe_list->name);
     printf("%s", recipe_list->instructions);
