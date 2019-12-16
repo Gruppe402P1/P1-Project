@@ -18,7 +18,7 @@ struct recipe
     char instructions[200];
 };
 
-/*void flush(void){
+void flush(void){
   char trash;
   
   do{
@@ -27,7 +27,7 @@ struct recipe
   while(trash != '\n');
 
   return;
-}*/
+}
 
 /*Får programmet til at indlæse opskriften fra en valgt txt fil*/
 int add_from_txt(struct ingredient ingrediens[], struct recipe *recipe_list);
@@ -118,7 +118,7 @@ int add_from_txt(struct ingredient ingrediens[], struct recipe *recipe_list)
     FILE *recipetxt;
     char temp[100];
     char* instruc_temp = (char*)calloc(2000, sizeof(char));
-    int n = 0, ingredient_count = 0, first = 0, second = 0, third = 0;
+    int n = 0, ingredient_count = 0, first = 0, second = 0, third = 0, number = 0;
 
     if(instruc_temp == NULL){
         printf("Failed to allocate memory");
@@ -138,27 +138,20 @@ int add_from_txt(struct ingredient ingrediens[], struct recipe *recipe_list)
     {
         if(temp[n] >= 0 && temp[n] < 10)
         {
-
-            first = temp[0];
-            n++;
-
-            if(temp[n] >= 0 && temp[n] < 10)
+            while(temp[n] >= 0 && temp[n] < 10)
             {
-                first *= 10;
-                second = temp[1];
-                n++;
-
-                if(temp[n] >= 0 && temp[n] < 10)
+                if(n > 0)
                 {
-                    first *= 10;
-                    second *= 10;
-                    third = temp[2];
-                    n++;
-                } 
+                    number *= 10;
+                }                    
+                number += temp[n];
+                n++;
+            }
+                n++;
             }
 
             strncpy(ingrediens[ingredient_count].name, temp + n, strlen(temp)-n);
-            ingrediens[ingredient_count].amount = first + second + third;
+            ingrediens[ingredient_count].amount = number;
             ingredient_count++;
         }
         else
